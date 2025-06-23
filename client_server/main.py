@@ -10,3 +10,5 @@ async def root():
 @app.get("/test", tags=["test"])
 async def test():
     return {"message": "This is a test endpoint"}
+
+

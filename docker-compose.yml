@@ -1,0 +1,49 @@
+services:
+  server:
+    build:
+      context: ./flower_server
+      dockerfile: Dockerfile
+    container_name: flower_server
+    ports:
+      - "8080:8080"
+    networks:
+      - flower_net
+
+  client1:
+    build:
+      context: ./client_server
+      dockerfile: Dockerfile
+    container_name: flower_client1
+    environment:
+      - CLIENT_ID=client1
+      - SERVER_ADDRESS=server:8080
+    ports:
+      - "5001:5000"
+    networks:
+      - client_net
+      - flower_net
+    depends_on:
+      - server
+
+  client2:
+    build:
+      context: ./client_server
+      dockerfile: Dockerfile
+    container_name: flower_client2
+    environment:
+      - CLIENT_ID=client2
+      - SERVER_ADDRESS=server:8080
+    ports:
+      - "5002:5000"
+    networks:
+      - client_net
+      - flower_net
+    depends_on:
+      - server
+
+networks:
+  flower_net:
+    driver: bridge
+
+  client_net:
+    driver: bridge
