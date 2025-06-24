@@ -46,7 +46,7 @@ async def predict():
     # args = parser.parse_args()
 
     client = FLCombinedClient("U001")
-    fl.client.start_numpy_client(server_address="localhost:8080", client=client)
+    fl.client.start_numpy_client(server_address="flower_server:8080", client=client)
     print(f"✅ FL完了。ユーザー U001 の推論と提案を生成中...")
     post_inference("U001", client.model_total, client.model_ratio, client.X_total, client.scaler_total, client.X_ratio, client.cat_cols)
 

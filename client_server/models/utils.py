@@ -122,6 +122,7 @@ def make_sequence_data_enhanced(df: pd.DataFrame, seq_len: int = 14):
 
     X_tensor = torch.tensor(np.stack(X), dtype=torch.float32)
     Y_tensor = torch.tensor(np.array(Y), dtype=torch.float32).unsqueeze(1)
+    print(f"X_tensor shape: {X_tensor.shape}, Y_tensor shape: {Y_tensor.shape}")
     date_seq = ts["date"].iloc[seq_len:].reset_index(drop=True)
     
     return X_tensor, Y_tensor, y_scaler, date_seq
