@@ -57,7 +57,8 @@ def get_latest_sequence_dynamic(df_raw, max_len=21):
     seq_len = min(max_len, n)
     if seq_len == 0:
         raise ValueError("履歴が存在しません")
-    return X_all[-seq_len:].unsqueeze(0)  # [1, seq_len, input_size]
+    latest_seq = X_all[-seq_len:, 0, :]  # [seq_len, input_size]
+    return latest_seq.unsqueeze(0)  
 
 
 def get_models(input_total, input_ratio, output_ratio):
